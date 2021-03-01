@@ -13,8 +13,12 @@ set(EXECUTABLE_NAME "flashcard_app")
 
 add_executable(flashcard_app
 		source/mainQuiz.cpp
-		headers/quiz.h
-		source/quiz.cpp)
+		source/QuizManager.cpp
+		headers/QuizManager.h
+		headers/MyRandom.h
+		source/MyRandom.cpp
+		headers/QuestionManager.h
+		source/QuestionManager.cpp)
 
 add_executable(question_maker
 		source/mainQuestionMaker.cpp

@@ -63,7 +63,6 @@ bool QuestionManager::saveToJson(const std::string& path) const
 
 bool QuestionManager::loadFromJson(const std::string& path)
 {
-
     std::ifstream file{path};
     if(file.good())
     {

@@ -1,10 +1,8 @@
 #include "../headers/QuizManager.h"
-#include <chrono>
-#include <thread>
+
 
 int main()
 {
-    using namespace std::chrono_literals;
     auto quiz = QuizManager();
 
     if(quiz.loadQuestions())
@@ -12,9 +10,19 @@ int main()
         while (quiz.getQuestionsSize() > 0)
         {
             quiz.printRandomQuestion();
-            std::this_thread::sleep_for(1s);
             system("cls");
         }
         quiz.printSummary();
+    }
+    else
+    {
+        std::cerr << "Cannot open file in path: ";
+        QuizManager::setFontColor(FontColor::red);
+        std::cerr << quiz.getPath() << '\n';
+        QuizManager::setFontColor(FontColor::white);
+        std::cerr << "Check if the path is correct" << '\n';
+
+        QuizManager::flush();
+        std::wcin.get();
     }
 }

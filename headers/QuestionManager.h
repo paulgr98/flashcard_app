@@ -29,7 +29,7 @@ public:
 
     void makeQuestion();
     bool saveToJson(const std::string& path = "questions.json") const;
-    bool loadFromJson(const std::string& path = "questions.json");
+    bool loadFromJson(const std::string& path);
     void printQuestions() const;
     QuestionContainer getAllQuestions() const;
 };

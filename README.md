@@ -1,5 +1,5 @@
-# vocabulary_quiz
-Simple vocabulary quiz, to learn words that you want.
+# Flashcard App
+Simple flashcard quiz, to learn words and many other things.
 
 INSTRUCTION:
 1. Make a text file with words and translations

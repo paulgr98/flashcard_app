@@ -12,7 +12,7 @@ set(CMAKE_BUILD_TYPE Debug)
 set(EXECUTABLE_NAME "vocabulary_quiz")
 
 add_executable(vocabulary_quiz
-		source/mainVocabularyQuiz.cpp
+		source/mainQuiz.cpp
 		headers/quiz.h
 		source/quiz.cpp)
 

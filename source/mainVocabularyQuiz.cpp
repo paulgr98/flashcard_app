@@ -1,5 +1,5 @@
 #include <iostream>
-#include "quiz.h"
+#include "../headers/quiz.h"
 #include <string>
 #include <io.h> //polskie znaki
 #include <fcntl.h> //polskie znaki

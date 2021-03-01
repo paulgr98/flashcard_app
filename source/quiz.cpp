@@ -1,4 +1,4 @@
-#include "quiz.h"
+#include "../headers/quiz.h"
 #include <fstream>
 #include <windows.h>
 #include <limits>
@@ -87,7 +87,7 @@ namespace Quiz
 		else
 		{
 			ustaw_kolor(czerwony);
-			std::wcout << L"  le!\n";
+			std::wcout << L"  ï¿½le!\n";
 			std::wcout << "  Poprawna odp to: " << get_slowko() << L"\n\n";
 			ustaw_kolor(bialy);
 			flush();

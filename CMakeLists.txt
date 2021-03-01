@@ -12,8 +12,14 @@ set(CMAKE_BUILD_TYPE Debug)
 set(EXECUTABLE_NAME "vocabulary_quiz")
 
 add_executable(vocabulary_quiz
-        quiz.cpp
-		quiz.h
-		main.cpp)
+		source/mainVocabularyQuiz.cpp
+		headers/quiz.h
+		source/quiz.cpp)
+
+add_executable(question_maker
+		source/mainQuestionMaker.cpp
+		headers/QuestionManager.h
+		source/QuestionManager.cpp)
+
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})

@@ -20,6 +20,7 @@ private:
     QuestionManager m_question_manager;
     QuestionContainer m_questions;
     std::string m_path;
+    unsigned int m_tries{0};
 
 public:
     QuizManager() = default;
@@ -29,7 +30,7 @@ public:
     static void flush();
     bool loadQuestions();
     void printRandomQuestion();
-    void printSummary();
+    void printSummary() const;
 
     void setPath();
     std::string getPath() const;

@@ -29,11 +29,12 @@ bool QuizManager::loadQuestions()
 
     return false;
 }
-
+//TODO: checkAnswer method
 void QuizManager::printRandomQuestion()
 {
     if(!m_questions.empty())
     {
+        m_tries++;
         auto rand_quest_it = std::next(std::begin(m_questions),
                                        m_random.get(0, m_questions.size() - 1));
 
@@ -73,12 +74,23 @@ void QuizManager::printRandomQuestion()
     }
 }
 
-//TODO: implement accuracy atc.
-void QuizManager::printSummary()
+void QuizManager::printSummary() const
 {
     setFontColor(FontColor::cyan);
-    std::wcout << L"\n\n\t\tTHE END!" << L'\n';
+    std::wcout << L"\n\tTHE END!" << L"\n\n";
     setFontColor(FontColor::white);
+
+    std::wcout << L" Tries: " << m_tries << L'\n';
+    float accuracy = round(((float)m_initial_questions_size / (float)m_tries) * 100.0f);
+    std::wcout << " Accuracy: ";
+
+    if(accuracy >= 80) setFontColor(FontColor::green);
+    else if(accuracy >= 50 && accuracy < 80) setFontColor(FontColor::cyan);
+    else setFontColor(FontColor::red);
+
+    std::wcout << accuracy << L"%\n";
+    setFontColor(FontColor::white);
+
     std::wcin.get();
 }
 

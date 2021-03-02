@@ -1,5 +1,6 @@
 #include "../headers/QuestionManager.h"
 
+//TODO: appending mode
 int main()
 {
     auto qm = QuestionManager();

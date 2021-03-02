@@ -11,6 +11,7 @@
 using json = nlohmann::json;
 using QuestionContainer = std::unordered_map<std::wstring, std::wstring>;
 
+//TODO: question editor
 class QuestionManager
 {
 private:

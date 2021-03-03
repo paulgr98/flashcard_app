@@ -8,7 +8,7 @@ int main()
 
     if(quiz.loadQuestions())
     {
-        while (quiz.getQuestionsSize() > 0)
+        while (quiz.getQuestionsSize() > 0) //get questions until there are any
         {
             quiz.printRandomQuestion();
             system("cls");

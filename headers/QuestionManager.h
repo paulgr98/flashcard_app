@@ -15,10 +15,10 @@ using QuestionContainer = std::unordered_map<std::wstring, std::wstring>;
 class QuestionManager
 {
 private:
-    std::wstring m_question{};
-    std::wstring m_answer{};
-    QuestionContainer m_allQuestions{};
-    std::string m_path{"questions.json"};
+    std::wstring m_question{}; //question typed by user
+    std::wstring m_answer{}; //answer typed by user
+    QuestionContainer m_allQuestions{}; //stores answers mapped to questions
+    std::string m_path{"questions.json"}; //path to file with questions
 
 public:
     QuestionManager();
@@ -37,8 +37,9 @@ public:
     bool saveToJson() const;
     bool loadFromJson(const std::string& path);
     bool loadFromJson();
-    void printQuestions() const;
+    void printAllQuestions() const;
     QuestionContainer getAllQuestions() const;
+
 };
 
 

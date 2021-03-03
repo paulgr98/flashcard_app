@@ -1,0 +1,4 @@
+"C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release "-DCMAKE_CXX_COMPILER=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.26.28801/bin/Hostx86/x86/cl.exe" -G "CodeBlocks - NMake Makefiles" C:\Users\Pawel\Desktop\C++\moje\flashcard_app
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/Pawel/Desktop/C++/moje/flashcard_app/cmake-build-release

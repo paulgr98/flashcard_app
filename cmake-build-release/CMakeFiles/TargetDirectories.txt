@@ -1,0 +1,4 @@
+C:/Users/Pawel/Desktop/C++/moje/flashcard_app/cmake-build-release/CMakeFiles/flashcard_app.dir
+C:/Users/Pawel/Desktop/C++/moje/flashcard_app/cmake-build-release/CMakeFiles/question_maker.dir
+C:/Users/Pawel/Desktop/C++/moje/flashcard_app/cmake-build-release/CMakeFiles/edit_cache.dir
+C:/Users/Pawel/Desktop/C++/moje/flashcard_app/cmake-build-release/CMakeFiles/rebuild_cache.dir

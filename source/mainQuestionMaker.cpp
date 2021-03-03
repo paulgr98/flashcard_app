@@ -43,7 +43,7 @@ int main()
     auto qm = QuestionManager();
     qm.setPath();
 
-    if(processMenu() == "2")
+    if(processMenu() == "2") //if user choice was appending existing file
     {
         if(!qm.loadFromJson())
         {
@@ -58,9 +58,9 @@ int main()
     do
     {
         qm.makeQuestion();
-    }while(!qm.getQuestion().empty() || !qm.getAnswer().empty());
+    }while(!qm.getQuestion().empty() || !qm.getAnswer().empty()); //make questions until q or a field is empty
 
-    if(!qm.getAllQuestions().empty())
+    if(!qm.getAllQuestions().empty()) //save to file if there is something to change
     {
         qm.saveToJson();
     }

@@ -2,7 +2,7 @@
 
 void QuizManager::setFontColor(const FontColor color)
 {
-    auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE); //console handle
     SetConsoleTextAttribute(hConsole, static_cast<WORD>(color));
 }
 
@@ -36,9 +36,10 @@ bool QuizManager::loadQuestions()
 //TODO: checkAnswer method
 void QuizManager::printRandomQuestion()
 {
-    if(!m_questions.empty())
+    if(!m_questions.empty()) //if there are any questions
     {
         m_tries++;
+        //random question iterator as std::pair
         auto rand_quest_it = std::next(std::begin(m_questions),
                                        m_random.get(0, m_questions.size() - 1));
 
@@ -55,7 +56,7 @@ void QuizManager::printRandomQuestion()
 
         if(user_ans == rand_quest_it->second)
         {
-            m_questions.erase(rand_quest_it);
+            m_questions.erase(rand_quest_it); //if the answer was correct, remove that question
 
             setFontColor(FontColor::green);
             std::wcout << L"\tGood answer!" << L'\n';
@@ -64,6 +65,7 @@ void QuizManager::printRandomQuestion()
         }
         else
         {
+            //if the answer was not correct, show the correct
             setFontColor(FontColor::red);
             std::wcout << L"\tBad answer :/" << L'\n';
             setFontColor(FontColor::white);
@@ -88,6 +90,7 @@ void QuizManager::printSummary() const
     float accuracy = round(((float)m_initial_questions_size / (float)m_tries) * 100.0f);
     std::wcout << " Accuracy: ";
 
+    //accuracy color depending on the value
     if(accuracy >= 80) setFontColor(FontColor::green);
     else if(accuracy >= 50 && accuracy < 80) setFontColor(FontColor::cyan);
     else setFontColor(FontColor::red);
@@ -106,8 +109,9 @@ void QuizManager::setPath()
     QuizManager::setFontColor(FontColor::white);
     std::getline(std::cin, new_path);
 
+    //remove spaces from path string (if for example user typed only spaces)
     new_path.erase(remove_if(new_path.begin(), new_path.end(), isspace), new_path.end());
-    if(!new_path.empty())
+    if(!new_path.empty()) //if path exists, make it default path to read
     {
         m_path = new_path;
     }

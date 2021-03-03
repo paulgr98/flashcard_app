@@ -19,7 +19,7 @@ private:
     unsigned int m_initial_questions_size;
     QuestionManager m_question_manager;
     QuestionContainer m_questions;
-    std::string m_path;
+    std::string m_path{"questions.json"};
     unsigned int m_tries{0};
 
 public:
@@ -28,6 +28,7 @@ public:
 
     static void setFontColor(const FontColor color);
     static void flush();
+    bool loadQuestions(const std::string& path);
     bool loadQuestions();
     void printRandomQuestion();
     void printSummary() const;

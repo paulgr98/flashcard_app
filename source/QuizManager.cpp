@@ -17,10 +17,9 @@ void QuizManager::flush()
     std::wcin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-bool QuizManager::loadQuestions()
+bool QuizManager::loadQuestions(const std::string& path)
 {
-    setPath();
-    if(m_question_manager.loadFromJson(m_path))
+    if(m_question_manager.loadFromJson(path))
     {
         m_questions = m_question_manager.getAllQuestions();
         m_initial_questions_size = m_questions.size();
@@ -28,6 +27,11 @@ bool QuizManager::loadQuestions()
     }
 
     return false;
+}
+
+bool QuizManager::loadQuestions()
+{
+    return loadQuestions(m_path);
 }
 //TODO: checkAnswer method
 void QuizManager::printRandomQuestion()
@@ -56,7 +60,7 @@ void QuizManager::printRandomQuestion()
             setFontColor(FontColor::green);
             std::wcout << L"\tGood answer!" << L'\n';
             setFontColor(FontColor::white);
-            std::this_thread::sleep_for(1s);
+            std::this_thread::sleep_for(0.8s);
         }
         else
         {
@@ -96,15 +100,16 @@ void QuizManager::printSummary() const
 
 void QuizManager::setPath()
 {
+    std::string new_path{};
     QuizManager::setFontColor(FontColor::cyan);
     std::wcout << L"\n Path to questions file (default is questions.json): ";
     QuizManager::setFontColor(FontColor::white);
-    std::getline(std::cin, m_path);
+    std::getline(std::cin, new_path);
 
-    m_path.erase(remove_if(m_path.begin(), m_path.end(), isspace), m_path.end());
-    if(m_path.empty())
+    new_path.erase(remove_if(new_path.begin(), new_path.end(), isspace), new_path.end());
+    if(!new_path.empty())
     {
-        m_path = "questions.json";
+        m_path = new_path;
     }
 
     system("cls");

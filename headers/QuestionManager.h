@@ -18,6 +18,7 @@ private:
     std::wstring m_question{};
     std::wstring m_answer{};
     QuestionContainer m_allQuestions{};
+    std::string m_path{"questions.json"};
 
 public:
     QuestionManager();
@@ -25,12 +26,17 @@ public:
     void setQuestion();
     void setAnswer();
 
+    void setPath();
+    std::string getPath() const;
+
     [[nodiscard]] std::wstring getQuestion() const;
     [[nodiscard]] std::wstring getAnswer() const;
 
     void makeQuestion();
-    bool saveToJson(const std::string& path = "questions.json") const;
+    bool saveToJson(const std::string& path) const;
+    bool saveToJson() const;
     bool loadFromJson(const std::string& path);
+    bool loadFromJson();
     void printQuestions() const;
     QuestionContainer getAllQuestions() const;
 };

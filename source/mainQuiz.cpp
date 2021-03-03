@@ -4,6 +4,7 @@
 int main()
 {
     auto quiz = QuizManager();
+    quiz.setPath();
 
     if(quiz.loadQuestions())
     {

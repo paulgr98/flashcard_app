@@ -61,6 +61,11 @@ bool QuestionManager::saveToJson(const std::string& path) const
     return false;
 }
 
+bool QuestionManager::saveToJson() const
+{
+    return saveToJson(m_path);
+}
+
 bool QuestionManager::loadFromJson(const std::string& path)
 {
     std::ifstream file{path};
@@ -76,7 +81,32 @@ bool QuestionManager::loadFromJson(const std::string& path)
     return false;
 }
 
+bool QuestionManager::loadFromJson()
+{
+    return loadFromJson(m_path);
+}
+
 QuestionContainer QuestionManager::getAllQuestions() const
 {
     return m_allQuestions;
+}
+
+void QuestionManager::setPath()
+{
+    std::string new_path{};
+    std::wcout << L"\n Path to questions file (default is questions.json): ";
+    std::getline(std::cin, new_path);
+
+    new_path.erase(remove_if(new_path.begin(), new_path.end(), isspace), new_path.end());
+    if(!new_path.empty())
+    {
+        m_path = new_path;
+    }
+
+    system("cls");
+}
+
+std::string QuestionManager::getPath() const
+{
+    return m_path;
 }

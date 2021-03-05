@@ -2,16 +2,19 @@
 
 QuestionManager::QuestionManager() = default;
 
+//TODO: remove spaces at the beginning and at the end
 void QuestionManager::setQuestion()
 {
     std::wcout << L"Question: ";
     std::getline(std::wcin, m_question);
+    m_question = Utility::trim(m_question);
 }
 
 void QuestionManager::setAnswer()
 {
     std::wcout << L"Answer: ";
     std::getline(std::wcin, m_answer);
+    m_answer = Utility::trim(m_answer);
 }
 
 std::wstring QuestionManager::getQuestion() const
@@ -97,8 +100,8 @@ void QuestionManager::setPath()
     std::wcout << L"\n Path to questions file (default is questions.json): ";
     std::getline(std::cin, new_path);
 
-    //remove spaces from path string (if for example user typed only spaces)
-    new_path.erase(remove_if(new_path.begin(), new_path.end(), isspace), new_path.end());
+    //remove trailing and leading spaces from path string
+    new_path = Utility::trim(new_path);
     if(!new_path.empty()) //if path exists, make it default path to read/save
     {
         m_path = new_path;

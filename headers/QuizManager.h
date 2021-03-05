@@ -5,10 +5,7 @@
 #include <limits>
 #include <chrono>
 #include <thread>
-#include <windows.h>
-#undef max //get rid of max macro from windows.h
-
-enum class FontColor { green = 2, cyan = 11, red = 12, purple = 13, white = 15};
+#include "Utility.h"
 
 using namespace std::chrono_literals; //definitions of s, ms, ...
 
@@ -26,8 +23,6 @@ public:
     QuizManager() = default;
     unsigned int getQuestionsSize() const; //get number of questions that left
 
-    static void setFontColor(const FontColor color);
-    static void flush();
     bool loadQuestions(const std::string& path);
     bool loadQuestions();
     void printRandomQuestion();

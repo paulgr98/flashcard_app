@@ -18,12 +18,12 @@ int main()
     else
     {
         std::cerr << "Cannot open file in path: ";
-        QuizManager::setFontColor(FontColor::red);
+        Utility::setFontColor(FontColor::red);
         std::cerr << quiz.getPath() << '\n';
-        QuizManager::setFontColor(FontColor::white);
+        Utility::setFontColor(FontColor::white);
         std::cerr << "Check if the path is correct" << '\n';
 
-        QuizManager::flush();
+        Utility::flush();
         std::wcin.get();
     }
 }

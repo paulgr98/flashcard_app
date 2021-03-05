@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <fstream>
 #include "../additional_libraries/nlohmann/json.hpp"
+#include "Utility.h"
 
 using json = nlohmann::json;
 using QuestionContainer = std::unordered_map<std::wstring, std::wstring>;

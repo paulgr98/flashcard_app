@@ -18,13 +18,15 @@ add_executable(flashcard_app
 		headers/MyRandom.h
 		source/MyRandom.cpp
 		headers/QuestionManager.h
-		source/QuestionManager.cpp)
+		source/QuestionManager.cpp
+		headers/Utility.h)
 
 add_executable(question_maker
 		source/mainQuestionMaker.cpp
 		headers/QuestionManager.h
 		source/QuestionManager.cpp
-		additional_libraries/nlohmann/json.hpp)
+		additional_libraries/nlohmann/json.hpp
+		headers/Utility.h)
 
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})

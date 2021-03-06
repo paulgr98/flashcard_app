@@ -74,54 +74,56 @@ public:
         {
             std::cout << '\n';
             std::cerr << " Cannot open file " << m_QM.getPath() << " to append" << '\n';
-            std::cerr << "Make sure the file exists" << '\n';
+            std::cerr << " Make sure the file exists" << '\n';
             std::cin.get();
         }
     }
 
     void editQuestions()
     {
-        std::cout << " Choose question to edit: " << "\n\n";
-        m_QM.printAllQuestions();
-        std::cout << "> ";
-
-        int choice{};
-        try
+        if(!m_QM.getAllQuestions().empty())
         {
-            std::cin >> choice;
+            std::cout << " Choose question to edit: " << "\n\n";
+            m_QM.printAllQuestions();
+            std::cout << "> ";
+
+            int choice{};
+            try
+            {
+                std::cin >> choice;
+            }
+            catch(std::exception& e)
+            {
+                throw e;
+            }
+
+            //get specific question
+            auto quest_it = std::next(m_QM.getAllQuestions().begin(), choice - 1);
+            std::wcout << L"\n " << quest_it->first << L" : " << quest_it->second << L'\n';
+
+            Utility::flush();
+
+            //get edited question
+            std::wcout << L" Question: ";
+            std::wstring new_qest{};
+            std::getline(std::wcin, new_qest);
+            new_qest = Utility::trim(new_qest);
+            if(new_qest.empty()) new_qest = quest_it->first; //if edited question was empty, use the old one
+
+
+            //get edited answer
+            std::wcout << L" Answer: ";
+            std::wstring new_answer{};
+            std::getline(std::wcin, new_answer);
+            new_answer = Utility::trim(new_answer);
+            if(new_answer.empty()) new_answer = quest_it->second; //if edited answer was empty, use the old one
+
+            //delete chosen question
+            m_QM.getAllQuestions().erase(quest_it);
+
+            //add edited question
+            m_QM.getAllQuestions().insert({new_qest, new_answer});
         }
-        catch(std::exception& e)
-        {
-            throw e;
-        }
-
-        //get specific question
-        auto quest_it = std::next(m_QM.getAllQuestions().begin(), choice - 1);
-        std::wcout << L"\n " << quest_it->first << L" : " << quest_it->second << L'\n';
-
-        Utility::flush();
-
-        //get edited question
-        std::wcout << L" Quesion: ";
-        std::wstring new_qest{};
-        std::getline(std::wcin, new_qest);
-        new_qest = Utility::trim(new_qest);
-        if(new_qest.empty()) new_qest = quest_it->first; //if edited question was empty, use the old one
-
-
-        //get edited answer
-        std::wcout << L" Answer: ";
-        std::wstring new_answer{};
-        std::getline(std::wcin, new_answer);
-        new_answer = Utility::trim(new_answer);
-        if(new_answer.empty()) new_answer = quest_it->second; //if edited answer was empty, use the old one
-
-        //delete chosen question
-        m_QM.getAllQuestions().erase(quest_it);
-
-        //add edited question
-        m_QM.getAllQuestions().insert({new_qest, new_answer});
-
     }
 
     bool saveToFile()
@@ -163,7 +165,7 @@ int main()
 
     if(!qe.saveToFile())
     {
-        std::cerr << "There was no questions to save" << '\n';
+        std::cerr << "\n There was no questions to save" << '\n';
         std::cin.get();
     }
 }

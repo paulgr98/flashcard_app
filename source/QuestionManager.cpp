@@ -41,9 +41,11 @@ void QuestionManager::makeQuestion()
 
 void QuestionManager::printAllQuestions() const
 {
+    int nr{1};
     for(auto [question, answer] : m_allQuestions)
     {
-        std::wcout << question << L" : " << answer << L'\n';
+        std::wcout << L' ' << nr << L". " << question << L" : " << answer << L'\n';
+        nr++;
     }
 }
 
@@ -89,7 +91,7 @@ bool QuestionManager::loadFromJson()
     return loadFromJson(m_path);
 }
 
-QuestionContainer QuestionManager::getAllQuestions() const
+QuestionContainer& QuestionManager::getAllQuestions()
 {
     return m_allQuestions;
 }

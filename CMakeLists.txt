@@ -21,8 +21,8 @@ add_executable(flashcard_app
 		source/QuestionManager.cpp
 		headers/Utility.h)
 
-add_executable(question_maker
-		source/mainQuestionMaker.cpp
+add_executable(question_editor
+		source/mainQuestionEditor.cpp
 		headers/QuestionManager.h
 		source/QuestionManager.cpp
 		additional_libraries/nlohmann/json.hpp

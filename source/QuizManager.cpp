@@ -1,7 +1,5 @@
 #include "../headers/QuizManager.h"
 
-
-
 unsigned int QuizManager::getQuestionsSize() const
 {
     return m_questions.size();
@@ -24,7 +22,7 @@ bool QuizManager::loadQuestions()
 {
     return loadQuestions(m_path);
 }
-//TODO: checkAnswer method
+//TODO: move checking answer to checkAnswer method
 void QuizManager::printRandomQuestion()
 {
     if(!m_questions.empty()) //if there are any questions

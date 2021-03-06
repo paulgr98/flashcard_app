@@ -39,7 +39,7 @@ public:
     bool loadFromJson(const std::string& path);
     bool loadFromJson();
     void printAllQuestions() const;
-    QuestionContainer getAllQuestions() const;
+    QuestionContainer& getAllQuestions();
 
 };
 

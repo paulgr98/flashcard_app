@@ -20,6 +20,11 @@ public:
         std::cout << "\tfield to assign old value" << '\n';
     }
 
+    void setPath()
+    {
+        m_QM.setPath();
+    }
+
     static Mode processMenu()
     {
         std::string choice{};
@@ -104,7 +109,7 @@ public:
             Utility::flush();
 
             //get edited question
-            std::wcout << L" Question: ";
+            std::wcout << L"Question: ";
             std::wstring new_qest{};
             std::getline(std::wcin, new_qest);
             new_qest = Utility::trim(new_qest);
@@ -112,7 +117,7 @@ public:
 
 
             //get edited answer
-            std::wcout << L" Answer: ";
+            std::wcout << L"Answer: ";
             std::wstring new_answer{};
             std::getline(std::wcin, new_answer);
             new_answer = Utility::trim(new_answer);
@@ -140,6 +145,8 @@ public:
 int main()
 {
     auto qe = QuestionEditor();
+    qe.setPath();
+    system("cls");
 
     switch(QuestionEditor::processMenu())
     {

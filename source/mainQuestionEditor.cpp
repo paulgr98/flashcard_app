@@ -1,5 +1,6 @@
 #include "../headers/QuestionManager.h"
-#include "../headers/Utility.h"
+
+//TODO: add delete question option
 
 enum class Mode {New, Append, Edit};
 
@@ -92,42 +93,40 @@ public:
             m_QM.printAllQuestions();
             std::cout << "> ";
 
+
             int choice{};
-            try
+            std::cin >> choice;
+
+            if(choice < 1 || choice > m_QM.getAllQuestions().size())
             {
-                std::cin >> choice;
-            }
-            catch(std::exception& e)
-            {
-                throw e;
+                throw std::out_of_range("Index out of range");
             }
 
             //get specific question
             auto quest_it = std::next(m_QM.getAllQuestions().begin(), choice - 1);
             std::wcout << L"\n " << quest_it->first << L" : " << quest_it->second << L'\n';
 
-            Utility::flush();
+            Utility::wflush();
 
             //get edited question
             std::wcout << L"Question: ";
-            std::wstring new_qest{};
-            std::getline(std::wcin, new_qest);
-            new_qest = Utility::trim(new_qest);
-            if(new_qest.empty()) new_qest = quest_it->first; //if edited question was empty, use the old one
-
+            std::wstring new_quest{};
+            std::getline(std::wcin, new_quest);
+            new_quest = Utility::trim(new_quest);
+            if (new_quest.empty()) new_quest = quest_it->first; //if edited question was empty, use the old one
 
             //get edited answer
             std::wcout << L"Answer: ";
             std::wstring new_answer{};
             std::getline(std::wcin, new_answer);
             new_answer = Utility::trim(new_answer);
-            if(new_answer.empty()) new_answer = quest_it->second; //if edited answer was empty, use the old one
+            if (new_answer.empty()) new_answer = quest_it->second; //if edited answer was empty, use the old one
 
-            //delete chosen question
+            //delete old question
             m_QM.getAllQuestions().erase(quest_it);
 
             //add edited question
-            m_QM.getAllQuestions().insert({new_qest, new_answer});
+            m_QM.getAllQuestions().insert({new_quest, new_answer});
         }
     }
 
@@ -164,7 +163,23 @@ int main()
         case Mode::Edit:
             system("cls");
             qe.loadQuestions();
-            qe.editQuestions();
+            try
+            {
+                qe.editQuestions();
+            }
+            catch (std::out_of_range& oor_exc)
+            {
+                std::cerr << "Error: question number incorrect" << '\n';
+                Utility::flush();
+                std::cin.get();
+            }
+            catch (std::exception& exc)
+            {
+                std::cerr << "Unknown error!" << '\n';
+                std::cerr << exc.what() << '\n';
+                Utility::flush();
+                std::cin.get();
+            }
             break;
     }
 

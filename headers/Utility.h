@@ -13,10 +13,16 @@ struct Utility
         SetConsoleTextAttribute(hConsole, static_cast<WORD>(color));
     }
 
-    static void flush()
+    static void wflush()
     {
         std::wcin.clear();
         std::wcin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    static void flush()
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
     template<typename charT>

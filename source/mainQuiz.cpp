@@ -23,7 +23,7 @@ int main()
         Utility::setFontColor(FontColor::white);
         std::cerr << "Check if the path is correct" << '\n';
 
-        Utility::flush();
+        Utility::wflush();
         std::wcin.get();
     }
 }

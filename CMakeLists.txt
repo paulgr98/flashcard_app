@@ -26,7 +26,9 @@ add_executable(question_editor
 		headers/QuestionManager.h
 		source/QuestionManager.cpp
 		additional_libraries/nlohmann/json.hpp
-		headers/Utility.h)
+		headers/Utility.h
+		headers/questionEditor.h
+		source/questionEditor.cpp)
 
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})

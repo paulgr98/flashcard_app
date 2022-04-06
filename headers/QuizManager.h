@@ -13,7 +13,7 @@ class QuizManager
 {
 private:
     MyRandom m_random; //random number generator used to get random questions
-    unsigned int m_initial_questions_size; //number of all questions
+    unsigned int m_initial_questions_size{}; //number of all questions
     QuestionManager m_question_manager;
     QuestionContainer m_questions;
     std::string m_path{"questions.json"}; //default path used to read questions

@@ -6,8 +6,8 @@ set(CMAKE_VS_PLATFORM_NAME "x86")
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_BUILD_TYPE Debug)
-#set(CMAKE_BUILD_TYPE Release)
+#set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 
 set(EXECUTABLE_NAME "flashcard_app")
 

@@ -2,12 +2,12 @@
 
 QuestionManager::QuestionManager() = default;
 
-//TODO: remove spaces at the beginning and at the end
 void QuestionManager::setQuestion()
 {
     std::wcout << L"Question: ";
     std::getline(std::wcin, m_question);
     m_question = Utility::trim(m_question);
+    m_question_encoded = Utility::utf8_encode(m_question);
 }
 
 void QuestionManager::setAnswer()
@@ -15,6 +15,7 @@ void QuestionManager::setAnswer()
     std::wcout << L"Answer: ";
     std::getline(std::wcin, m_answer);
     m_answer = Utility::trim(m_answer);
+    m_answer_encoded = Utility::utf8_encode(m_answer);
 }
 
 std::wstring QuestionManager::getQuestion() const
@@ -35,7 +36,8 @@ void QuestionManager::makeQuestion()
 
     if(!m_question.empty() || !m_answer.empty()) //insert q and a if they both exists
     {
-        m_allQuestions.insert({m_question, m_answer});
+        m_allQuestions.insert({m_answer, m_question});
+        m_allQuestionsEncoded.insert({m_question_encoded, m_answer_encoded});
     }
 }
 
@@ -54,7 +56,7 @@ bool QuestionManager::saveToJson(const std::string& path) const
     std::ofstream file{path};
     if(file.good())
     {
-        json json_obj = m_allQuestions;
+        json json_obj = m_allQuestionsEncoded;
         std::string json_string = json_obj.dump(4); //make json object into string with indent of 4
 
         file << json_string;
@@ -77,7 +79,15 @@ bool QuestionManager::loadFromJson(const std::string& path)
     if(file.good())
     {
         json json_obj = json::parse(file); //read from file to json object
-        m_allQuestions = json_obj.get<QuestionContainer>(); //make json object into questions
+        m_allQuestionsEncoded = json_obj.get<QuestionContainerEncoded>(); //make json object into questions
+
+        //iterate through questions and decode them
+        for(auto [question, answer] : m_allQuestionsEncoded)
+        {
+            std::wstring question_decoded = Utility::utf8_decode(question);
+            std::wstring answer_decoded = Utility::utf8_decode(answer);
+            m_allQuestions.insert({question_decoded, answer_decoded});
+        }
 
         file.close();
         return true;
@@ -94,6 +104,10 @@ bool QuestionManager::loadFromJson()
 QuestionContainer& QuestionManager::getAllQuestions()
 {
     return m_allQuestions;
+}
+
+QuestionContainerEncoded& QuestionManager::getAllQuestionsEncoded() {
+    return m_allQuestionsEncoded;
 }
 
 void QuestionManager::setPath()
@@ -116,3 +130,4 @@ std::string QuestionManager::getPath() const
 {
     return m_path;
 }
+

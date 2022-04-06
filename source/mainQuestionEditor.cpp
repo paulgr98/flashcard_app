@@ -1,7 +1,7 @@
 #include "../headers/QuestionManager.h"
 #include "../headers/Utility.h"
 
-enum class Mode {New, Append, Edit};
+enum class Mode {New, Append, Edit, Exit};
 
 class QuestionEditor
 {
@@ -25,6 +25,11 @@ public:
         m_QM.setPath();
     }
 
+    QuestionManager& getQM()
+    {
+        return m_QM;
+    }
+
     static Mode processMenu()
     {
         std::string choice{};
@@ -37,6 +42,7 @@ public:
             std::cout << "\t1. Create new file with questions" << '\n';
             std::cout << "\t2. Append existing file with questions" << '\n';
             std::cout << "\t3. Edit existing questions" << '\n';
+            std::cout << "\t4. Exit" << '\n';
             std::cout << "> ";
 
 
@@ -54,6 +60,10 @@ public:
             else if(choice == "3")
             {
                 return Mode::Edit;
+            }
+            else if(choice == "4")
+            {
+                return Mode::Exit;
             }
             else
             {
@@ -104,6 +114,7 @@ public:
 
             //get specific question
             auto quest_it = std::next(m_QM.getAllQuestions().begin(), choice - 1);
+            auto quest_encoded_it = std::next(m_QM.getAllQuestionsEncoded().begin(), choice - 1);
             std::wcout << L"\n " << quest_it->first << L" : " << quest_it->second << L'\n';
 
             Utility::flush();
@@ -125,9 +136,11 @@ public:
 
             //delete chosen question
             m_QM.getAllQuestions().erase(quest_it);
+            m_QM.getAllQuestionsEncoded().erase(quest_encoded_it);
 
             //add edited question
             m_QM.getAllQuestions().insert({new_qest, new_answer});
+            m_QM.getAllQuestionsEncoded().insert({Utility::utf8_encode(new_qest), Utility::utf8_encode(new_answer)});
         }
     }
 
@@ -148,27 +161,39 @@ int main()
     qe.setPath();
     system("cls");
 
-    switch(QuestionEditor::processMenu())
+    Mode mode;
+    do
     {
-        case Mode::New:
-            system("cls");
-            qe.makeQuestions();
-            break;
+        mode = QuestionEditor::processMenu();
+        switch (mode) {
+            case Mode::New:
+                system("cls");
+                qe.makeQuestions();
+                break;
 
-        case Mode::Append:
-            system("cls");
-            qe.loadQuestions();
-            qe.makeQuestions();
-            break;
+            case Mode::Append:
+                system("cls");
+                if(qe.getQM().getAllQuestions().empty())
+                {
+                    qe.loadQuestions();
+                }
+                qe.makeQuestions();
+                break;
 
-        case Mode::Edit:
-            system("cls");
-            qe.loadQuestions();
-            qe.editQuestions();
-            break;
-    }
+            case Mode::Edit:
+                system("cls");
+                if(qe.getQM().getAllQuestions().empty())
+                {
+                    qe.loadQuestions();
+                }
+                qe.editQuestions();
+                break;
 
-    system("cls");
+            case Mode::Exit:
+                break;
+        }
+        system("cls");
+    } while(mode != Mode::Exit);
 
     if(!qe.saveToFile())
     {

@@ -2,6 +2,8 @@
 
 #include <Windows.h>
 #undef max //get rid of max macro from windows.h
+#include <codecvt> // codecvt_utf8
+#include <locale>  // wstring_convert
 
 enum class FontColor { green = 2, cyan = 11, red = 12, purple = 13, white = 15};
 
@@ -39,6 +41,20 @@ struct Utility
             return std::basic_string<charT>(start, end + 1); //return new string without leading and trailing spaces
         }
         return std::basic_string<charT>();
+    }
+
+    // encoding function
+    static std::string utf8_encode(std::wstring& wide_string)
+    {
+        static std::wstring_convert<std::codecvt_utf8<wchar_t>> utf8_conv;
+        return utf8_conv.to_bytes(wide_string);
+    }
+
+    // decoding function
+    static std::wstring utf8_decode(std::basic_string<char, std::char_traits<char>, std::allocator<char>> normal_string)
+    {
+        static std::wstring_convert<std::codecvt_utf8<wchar_t>> utf8_conv;
+        return utf8_conv.from_bytes(normal_string);
     }
 };
 

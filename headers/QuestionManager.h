@@ -11,6 +11,7 @@
 
 using json = nlohmann::json;
 using QuestionContainer = std::unordered_map<std::wstring, std::wstring>;
+using QuestionContainerEncoded = std::unordered_map<std::string, std::string>;
 
 //TODO: question editor
 class QuestionManager
@@ -18,7 +19,10 @@ class QuestionManager
 private:
     std::wstring m_question{}; //question typed by user
     std::wstring m_answer{}; //answer typed by user
+    std::string m_question_encoded{}; //encoded question with utf-8
+    std::string m_answer_encoded{}; //encoded answer with utf-8
     QuestionContainer m_allQuestions{}; //stores answers mapped to questions
+    QuestionContainerEncoded m_allQuestionsEncoded{}; //stores answers mapped to questions (encoded)
     std::string m_path{"questions.json"}; //path to file with questions
 
 public:
@@ -40,7 +44,7 @@ public:
     bool loadFromJson();
     void printAllQuestions() const;
     QuestionContainer& getAllQuestions();
-
+    QuestionContainerEncoded& getAllQuestionsEncoded();
 };
 
 

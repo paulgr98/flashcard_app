@@ -16,5 +16,3 @@ SUMMARY:
 
 Quiz asks you the translations and you have to type the word in foreign language.
 You can switch this just by typing translations and then words after translations in the file
-
-As for now, the quiz is only in Polish language. I will probably change it and remake it using Qt

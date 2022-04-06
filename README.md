@@ -16,3 +16,5 @@ SUMMARY:
 
 Quiz asks you the translations and you have to type the word in foreign language.
 You can switch this just by typing translations and then words after translations in the file
+
+I'm planning to implement this project in Qt

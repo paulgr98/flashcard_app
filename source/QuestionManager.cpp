@@ -36,7 +36,7 @@ void QuestionManager::makeQuestion()
 
     if(!m_question.empty() || !m_answer.empty()) //insert q and a if they both exists
     {
-        m_allQuestions.insert({m_answer, m_question});
+        m_allQuestions.insert({m_question, m_answer});
         m_allQuestionsEncoded.insert({m_question_encoded, m_answer_encoded});
     }
 }
